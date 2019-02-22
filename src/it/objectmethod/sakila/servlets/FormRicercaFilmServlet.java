@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.objectmethod.sakila.dao.FilmDao;
-import it.objectmethod.sakila.dao.impl.FilmDaoImpl;
-import it.objectmethod.sakila.domain.Film;
+import it.objectmethod.sakila.dao.CategoriaDao;
+import it.objectmethod.sakila.dao.impl.CategoriaDaoImpl;
+import it.objectmethod.sakila.domain.Categoria;
 @WebServlet("/ricerca")
 public class FormRicercaFilmServlet extends HttpServlet{
 
@@ -22,9 +22,9 @@ public class FormRicercaFilmServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		FilmDao filmDao = new FilmDaoImpl();
-		List<Film> listaCategoria = new ArrayList<>();
-		listaCategoria = filmDao.findAllCategory();
+		CategoriaDao categoriaDao = new CategoriaDaoImpl();
+		List<Categoria> listaCategoria = new ArrayList<>();
+		listaCategoria = categoriaDao.findAllCategory();
 		request.setAttribute("lista",listaCategoria);
 		request.getRequestDispatcher("ricerca-film.jsp").forward(request, response);
 	}

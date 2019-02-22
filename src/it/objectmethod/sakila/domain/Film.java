@@ -3,10 +3,10 @@ package it.objectmethod.sakila.domain;
 public class Film {
 
 	private String name;
-	private String category;
-	private int idFilm;
-	private int category_id;
+	private int id;
 	private String last_update;
+	private String descrizione;
+	private int year;
 
 	public String getName() {
 		return name;
@@ -14,30 +14,28 @@ public class Film {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public String getLast_update() {
 		return last_update;
 	}
 	public void setLast_update(String last_update) {
 		this.last_update = last_update;
 	}
-	public int getIdFilm() {
-		return idFilm;
+	public String getDescrizione() {
+		return descrizione;
 	}
-	public void setIdFilm(int idFilm) {
-		this.idFilm = idFilm;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
-	public int getCategory_id() {
-		return category_id;
+	public int getYear() {
+		return year;
 	}
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setYear(int year) {
+		this.year = year;
 	}
-
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 }

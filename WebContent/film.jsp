@@ -1,6 +1,6 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach items = "${lista}" var = "film">
-<a href="prova">${film.name}</a><br>
-</c:forEach>
+	<c:forEach items="${lista}" var="film">
+		<a href="prova?idFilm=${film.id}">${film.name}</a>
+		<p>Descrizione: ${film.descrizione}</p>
+		<p>anno: ${film.year}</p>
+	</c:forEach>
 </body>
 </html>

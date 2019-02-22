@@ -12,7 +12,7 @@
 <form action = "film">
 <p>Seleziona categoria: <select name = "idCategoria">
 <c:forEach items = "${lista}" var = "categoria">
-<option value = "${categoria.category_id}">${categoria.category}</option>
+<option value = "${categoria.id}">${categoria.name}</option>
 </c:forEach>
 </select>
 <p> Inserisci nome film: <input type = "text" name = "nomeFilm" value="${nomeAttore}"><br></p>

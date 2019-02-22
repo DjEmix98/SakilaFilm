@@ -14,48 +14,6 @@ import it.objectmethod.sakila.domain.Film;
 public class FilmDaoImpl implements FilmDao {
 
 	@Override
-	public List<Film> findAllCategory() {
-		List<Film> listaCategoria = new ArrayList<>();
-		Connection conn = ConnectionConfig.getConnection();
-		PreparedStatement stmt = null;
-		try {
-			String sql = "SELECT * FROM category";
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
-				Film categoriaFilm = new Film();
-				categoriaFilm.setCategory(rs.getString("name"));
-				categoriaFilm.setCategory_id(rs.getInt("category_id"));
-				categoriaFilm.setLast_update(rs.getString("last_update"));
-				listaCategoria.add(categoriaFilm);
-			}
-
-			rs.close();
-			stmt.close();
-			conn.close();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-
-			try{
-				if(stmt!=null) {
-					stmt.close();
-				}				
-			}catch(SQLException se2){
-				se2.printStackTrace();
-			}
-			try{
-				if(conn!=null) {
-					conn.close();
-				}	
-			}catch(SQLException se){
-				se.printStackTrace();
-			}
-		}
-		return listaCategoria;
-	}
-
-	@Override
 	public List<Film> findFilm(int category_id,String nameFilm) {
 		List<Film> listaIdFilm = new ArrayList<>();
 		Connection conn = ConnectionConfig.getConnection();
@@ -68,10 +26,11 @@ public class FilmDaoImpl implements FilmDao {
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Film idFilm = new Film();
-				idFilm.setIdFilm(rs.getInt("film_id"));
+				idFilm.setId(rs.getInt("film_id"));
 				idFilm.setName(rs.getString("title"));
-				idFilm.setCategory_id(rs.getInt("category_id"));
 				idFilm.setLast_update(rs.getString("last_update"));
+				idFilm.setDescrizione(rs.getString("description"));
+				idFilm.setYear(rs.getInt("release_year"));
 				listaIdFilm.add(idFilm);
 			}
 
