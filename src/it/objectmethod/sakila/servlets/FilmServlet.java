@@ -23,12 +23,19 @@ public class FilmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		FilmDao filmDao = new FilmDaoImpl();
-		List<Film> listaCategoria = new ArrayList<>();
+		List<Film> listaFilm = new ArrayList<>();
 		String categoryIdString = request.getParameter("idCategoria");
+		String idAttoreString = request.getParameter("idAttore");
 		String nomeFilm = "%"+request.getParameter("nomeFilm")+"%";
-		int idCategoria = Integer.parseInt(categoryIdString);
-		listaCategoria = filmDao.findFilm(idCategoria,nomeFilm);
-		request.setAttribute("lista",listaCategoria);
+		if(categoryIdString!=null){
+			int idCategoria = Integer.parseInt(categoryIdString);
+			listaFilm = filmDao.findFilmForFilter(idCategoria,nomeFilm);
+		}
+		else if(idAttoreString!=null) {
+			int idAttore = Integer.parseInt(idAttoreString);
+			listaFilm = filmDao.findFilmForActor(idAttore);
+		}
+		request.setAttribute("lista",listaFilm);
 		request.getRequestDispatcher("film.jsp").forward(request, response);
 	}
 

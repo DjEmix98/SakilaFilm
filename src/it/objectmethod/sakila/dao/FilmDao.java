@@ -6,5 +6,6 @@ import it.objectmethod.sakila.domain.Film;
 
 public interface FilmDao {
 
-	List<Film> findFilm(int category_id, String nameFilm);
+	List<Film> findFilmForFilter(int category_id, String nameFilm);
+	List<Film> findFilmForActor(int idActor);
 }

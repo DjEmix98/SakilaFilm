@@ -4,7 +4,8 @@ public class Attore {
 
 	private String nome;
 	private String cognome;
-	private String id;
+	private String last_update;
+	private int id;
 	
 	public String getNome() {
 		return nome;
@@ -18,11 +19,16 @@ public class Attore {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	
+	public String getLast_update() {
+		return last_update;
+	}
+	public void setLast_update(String last_update) {
+		this.last_update = last_update;
+	}
 	}

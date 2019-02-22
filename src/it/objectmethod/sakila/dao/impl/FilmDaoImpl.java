@@ -14,8 +14,8 @@ import it.objectmethod.sakila.domain.Film;
 public class FilmDaoImpl implements FilmDao {
 
 	@Override
-	public List<Film> findFilm(int category_id,String nameFilm) {
-		List<Film> listaIdFilm = new ArrayList<>();
+	public List<Film> findFilmForFilter(int category_id,String nameFilm) {
+		List<Film> listaFilm = new ArrayList<>();
 		Connection conn = ConnectionConfig.getConnection();
 		PreparedStatement stmt = null;
 		try {
@@ -26,13 +26,13 @@ public class FilmDaoImpl implements FilmDao {
 			stmt.setString(3, nameFilm);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				Film idFilm = new Film();
-				idFilm.setId(rs.getInt("film_id"));
-				idFilm.setName(rs.getString("title"));
-				idFilm.setLast_update(rs.getString("last_update"));
-				idFilm.setDescrizione(rs.getString("description"));
-				idFilm.setYear(rs.getInt("release_year"));
-				listaIdFilm.add(idFilm);
+				Film Film = new Film();
+				Film.setId(rs.getInt("film_id"));
+				Film.setName(rs.getString("title"));
+				Film.setLast_update(rs.getString("last_update"));
+				Film.setDescrizione(rs.getString("description"));
+				Film.setYear(rs.getInt("release_year"));
+				listaFilm.add(Film);
 			}
 
 			rs.close();
@@ -57,7 +57,52 @@ public class FilmDaoImpl implements FilmDao {
 				se.printStackTrace();
 			}
 		}
-		return listaIdFilm;
+		return listaFilm;
+	}
+
+	@Override
+	public List<Film> findFilmForActor(int idActor) {
+		List<Film> listaFilm = new ArrayList<>();
+		Connection conn = ConnectionConfig.getConnection();
+		PreparedStatement stmt = null;
+		try {
+			String sql = "select f.* from film as f inner join film_actor as fc on f.film_id=fc.film_id where fc.actor_id=?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, idActor);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				Film Film = new Film();
+				Film.setId(rs.getInt("film_id"));
+				Film.setName(rs.getString("title"));
+				Film.setLast_update(rs.getString("last_update"));
+				Film.setDescrizione(rs.getString("description"));
+				Film.setYear(rs.getInt("release_year"));
+				listaFilm.add(Film);
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+
+			try{
+				if(stmt!=null) {
+					stmt.close();
+				}				
+			}catch(SQLException se2){
+				se2.printStackTrace();
+			}
+			try{
+				if(conn!=null) {
+					conn.close();
+				}	
+			}catch(SQLException se){
+				se.printStackTrace();
+			}
+		}
+		return listaFilm;
 	}
 
 
