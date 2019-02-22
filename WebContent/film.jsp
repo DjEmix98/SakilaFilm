@@ -9,7 +9,7 @@
 </head>
 <body>
 	<c:forEach items="${lista}" var="film">
-		<a href="prova?idFilm=${film.id}">${film.name}</a>
+		<a href="attori?idFilm=${film.id}">${film.name}</a>
 		<p>Descrizione: ${film.descrizione}</p>
 		<p>anno: ${film.year}</p>
 	</c:forEach>

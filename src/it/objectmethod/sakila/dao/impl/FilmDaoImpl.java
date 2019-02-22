@@ -19,10 +19,11 @@ public class FilmDaoImpl implements FilmDao {
 		Connection conn = ConnectionConfig.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			String sql = "SELECT * FROM sakila.film_category inner join film on film_category.film_id=film.film_id where film_category.category_id=? and title LIKE ?";
+			String sql = "select f.* from film as f inner join film_category as fc on f.film_id=fc.film_id where (fc.category_id=? or ?=0) and f.title like ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, category_id);
-			stmt.setString(2, nameFilm);
+			stmt.setInt(2, category_id);
+			stmt.setString(3, nameFilm);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Film idFilm = new Film();

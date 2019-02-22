@@ -11,6 +11,7 @@
 
 <form action = "film">
 <p>Seleziona categoria: <select name = "idCategoria">
+<option value = "0">Tutte le categorie</option>
 <c:forEach items = "${lista}" var = "categoria">
 <option value = "${categoria.id}">${categoria.name}</option>
 </c:forEach>
